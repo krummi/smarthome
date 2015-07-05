@@ -1,0 +1,21 @@
+extends layouts/login
+
+block content
+  // BEGIN PAGE HEAD
+  .page-head
+    // BEGIN PAGE TITLE
+    .page-title
+      h1
+        | Dashboard
+        small &nbsp; statistics & reports
+    // END PAGE TITLE
+  // END PAGE HEAD
+  // BEGIN PAGE BREADCRUMB
+  ul.page-breadcrumb.breadcrumb.hide
+    li
+      a(href='javascript:;') Home
+      i.fa.fa-circle
+    li.active
+      | Dashboard
+  // END PAGE BREADCRUMB
+  | Stuff!

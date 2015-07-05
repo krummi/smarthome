@@ -1,1 +1,481 @@
-extends layout
+extends layouts/default
+
+block content
+  // BEGIN PAGE HEAD
+  .page-head
+    // BEGIN PAGE TITLE
+    .page-title
+      h1
+        | Dashboard
+        small &nbsp; statistics & reports
+    // END PAGE TITLE
+  // END PAGE HEAD
+  // BEGIN PAGE BREADCRUMB
+  ul.page-breadcrumb.breadcrumb.hide
+    li
+      a(href='javascript:;') Home
+      i.fa.fa-circle
+    li.active
+      | Dashboard
+  // END PAGE BREADCRUMB
+  // BEGIN PAGE CONTENT INNER
+  .row.margin-top-10
+    .col-lg-3.col-md-3.col-sm-6.col-xs-12
+      .dashboard-stat2
+        .display
+          .number
+            h3.font-green-sharp
+              | 7800
+              small.font-green-sharp $
+            small TOTAL PROFIT
+          .icon
+            i.icon-pie-chart
+        .progress-info
+          .progress
+            span.progress-bar.progress-bar-success.green-sharp(style='width: 76%;')
+              span.sr-only 76% progress
+          .status
+            .status-title
+              | progress
+            .status-number
+              | 76%
+    .col-lg-3.col-md-3.col-sm-6.col-xs-12
+      .dashboard-stat2
+        .display
+          .number
+            h3.font-red-haze 1349
+            small NEW FEEDBACKS
+          .icon
+            i.icon-like
+        .progress-info
+          .progress
+            span.progress-bar.progress-bar-success.red-haze(style='width: 85%;')
+              span.sr-only 85% change
+          .status
+            .status-title
+              | change
+            .status-number
+              | 85%
+    .col-lg-3.col-md-3.col-sm-6.col-xs-12
+      .dashboard-stat2
+        .display
+          .number
+            h3.font-blue-sharp 567
+            small NEW ORDERS
+          .icon
+            i.icon-basket
+        .progress-info
+          .progress
+            span.progress-bar.progress-bar-success.blue-sharp(style='width: 45%;')
+              span.sr-only 45% grow
+          .status
+            .status-title
+              | grow
+            .status-number
+              | 45%
+    .col-lg-3.col-md-3.col-sm-6.col-xs-12
+      .dashboard-stat2
+        .display
+          .number
+            h3.font-purple-soft 276
+            small NEW USERS
+          .icon
+            i.icon-user
+        .progress-info
+          .progress
+            span.progress-bar.progress-bar-success.purple-soft(style='width: 57%;')
+              span.sr-only 56% change
+          .status
+            .status-title
+              | change
+            .status-number
+              | 57%
+  .row
+    .col-md-6.col-sm-12
+      // BEGIN PORTLET
+      .portlet.light
+        .portlet-title
+          .caption.caption-md
+            i.icon-bar-chart.theme-font-color.hide
+            span.caption-subject.theme-font-color.bold.uppercase Shopping cart
+            span.caption-helper &nbsp; 14 items
+        .portlet-body
+          .scroller(style="height: 200px;", data-always-visible="1", data-rail-visible1="0", data-handle-color="#D7DCE2")
+            ul.feeds
+              //
+              // TODO: for i in tasks!
+              //
+              li
+                .col1
+                  .cont
+                    .cont-col1
+                      .label.label-sm.label-success
+                        i.fa.fa-bell-o
+                    .cont-col2
+                      .desc You have 4 pending tasks. <span class="label label-sm label-info">Take action <i class="fa fa-share"></i>
+      // END PORTLET
+  // END PAGE CONTENT INNER
+  // BEGIN QUICK SIDEBAR
+  a.page-quick-sidebar-toggler(href='javascript:;')
+    i.icon-login
+  .page-quick-sidebar-wrapper
+    .page-quick-sidebar
+      .nav-justified
+        ul.nav.nav-tabs.nav-justified
+          li.active
+            a(href='#quick_sidebar_tab_1', data-toggle='tab')
+              | Users
+              span.badge.badge-danger 2
+          li
+            a(href='#quick_sidebar_tab_2', data-toggle='tab')
+              | Alerts
+              span.badge.badge-success 7
+          li.dropdown
+            a.dropdown-toggle(href='javascript:;', data-toggle='dropdown')
+              | More
+              i.fa.fa-angle-down
+            ul.dropdown-menu.pull-right(role='menu')
+              li
+                a(href='#quick_sidebar_tab_3', data-toggle='tab')
+                  i.icon-bell
+                  |  Alerts
+              li
+                a(href='#quick_sidebar_tab_3', data-toggle='tab')
+                  i.icon-info
+                  |  Notifications
+              li
+                a(href='#quick_sidebar_tab_3', data-toggle='tab')
+                  i.icon-speech
+                  |  Activities
+              li.divider
+              li
+                a(href='#quick_sidebar_tab_3', data-toggle='tab')
+                  i.icon-settings
+                  |  Settings
+        .tab-content
+          #quick_sidebar_tab_1.tab-pane.active.page-quick-sidebar-chat
+            .page-quick-sidebar-chat-users(data-rail-color='#ddd', data-wrapper-class='page-quick-sidebar-list')
+              h3.list-heading Staff
+              ul.media-list.list-items
+                li.media
+                  .media-status
+                    span.badge.badge-success 8
+                  img.media-object(src='/admin/layout/img/avatar3.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Bob Nilson
+                    .media-heading-sub
+                      | Project Manager
+                li.media
+                  img.media-object(src='/admin/layout/img/avatar1.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Nick Larson
+                    .media-heading-sub
+                      | Art Director
+                li.media
+                  .media-status
+                    span.badge.badge-danger 3
+                  img.media-object(src='/admin/layout/img/avatar4.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Deon Hubert
+                    .media-heading-sub
+                      | CTO
+                li.media
+                  img.media-object(src='/admin/layout/img/avatar2.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Ella Wong
+                    .media-heading-sub
+                      | CEO
+              h3.list-heading Customers
+              ul.media-list.list-items
+                li.media
+                  .media-status
+                    span.badge.badge-warning 2
+                  img.media-object(src='/admin/layout/img/avatar6.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Lara Kunis
+                    .media-heading-sub
+                      | CEO, Loop Inc
+                    .media-heading-small
+                      | Last seen 03:10 AM
+                li.media
+                  .media-status
+                    span.label.label-sm.label-success new
+                  img.media-object(src='/admin/layout/img/avatar7.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Ernie Kyllonen
+                    .media-heading-sub
+                      | Project Manager,
+                      br
+                      | 													 SmartBizz PTL
+                li.media
+                  img.media-object(src='/admin/layout/img/avatar8.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Lisa Stone
+                    .media-heading-sub
+                      | CTO, Keort Inc
+                    .media-heading-small
+                      | Last seen 13:10 PM
+                li.media
+                  .media-status
+                    span.badge.badge-success 7
+                  img.media-object(src='/admin/layout/img/avatar9.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Deon Portalatin
+                    .media-heading-sub
+                      | CFO, H&D LTD
+                li.media
+                  img.media-object(src='/admin/layout/img/avatar10.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Irina Savikova
+                    .media-heading-sub
+                      | CEO, Tizda Motors Inc
+                li.media
+                  .media-status
+                    span.badge.badge-danger 4
+                  img.media-object(src='/admin/layout/img/avatar11.jpg', alt='...')
+                  .media-body
+                    h4.media-heading Maria Gomez
+                    .media-heading-sub
+                      | Manager, Infomatic Inc
+                    .media-heading-small
+                      | Last seen 03:10 AM
+            .page-quick-sidebar-item
+              .page-quick-sidebar-chat-user
+                .page-quick-sidebar-nav
+                  a.page-quick-sidebar-back-to-list(href='javascript:;')
+                    i.icon-arrow-left
+                    | Back
+                .page-quick-sidebar-chat-user-messages
+                  .post.out
+                    img.avatar(alt='', src='/admin/layout/img/avatar3.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Bob Nilson
+                      span.datetime 20:15
+                      span.body
+                        | When could you send me the report ?
+                  .post.in
+                    img.avatar(alt='', src='/admin/layout/img/avatar2.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Ella Wong
+                      span.datetime 20:15
+                      span.body
+                        | Its almost done. I will be sending it shortly
+                  .post.out
+                    img.avatar(alt='', src='/admin/layout/img/avatar3.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Bob Nilson
+                      span.datetime 20:15
+                      span.body
+                        | Alright. Thanks! :)
+                  .post.in
+                    img.avatar(alt='', src='/admin/layout/img/avatar2.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Ella Wong
+                      span.datetime 20:16
+                      span.body
+                        | You are most welcome. Sorry for the delay.
+                  .post.out
+                    img.avatar(alt='', src='/admin/layout/img/avatar3.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Bob Nilson
+                      span.datetime 20:17
+                      span.body
+                        | No probs. Just take your time :)
+                  .post.in
+                    img.avatar(alt='', src='/admin/layout/img/avatar2.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Ella Wong
+                      span.datetime 20:40
+                      span.body
+                        | Alright. I just emailed it to you.
+                  .post.out
+                    img.avatar(alt='', src='/admin/layout/img/avatar3.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Bob Nilson
+                      span.datetime 20:17
+                      span.body
+                        | Great! Thanks. Will check it right away.
+                  .post.in
+                    img.avatar(alt='', src='/admin/layout/img/avatar2.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Ella Wong
+                      span.datetime 20:40
+                      span.body
+                        | Please let me know if you have any comment.
+                  .post.out
+                    img.avatar(alt='', src='/admin/layout/img/avatar3.jpg')
+                    .message
+                      span.arrow
+                      a.name(href='javascript:;') Bob Nilson
+                      span.datetime 20:17
+                      span.body
+                        | Sure. I will check and buzz you if anything needs to be corrected.
+                .page-quick-sidebar-chat-user-form
+                  .input-group
+                    input.form-control(type='text', placeholder='Type a message here...')
+                    .input-group-btn
+                      button.btn.blue(type='button')
+                        i.icon-paper-clip
+          #quick_sidebar_tab_2.tab-pane.page-quick-sidebar-alerts
+            .page-quick-sidebar-alerts-list
+              h3.list-heading General
+              ul.feeds.list-items
+                li
+                  .col1
+                    .cont
+                      .cont-col1
+                        .label.label-sm.label-info
+                          i.fa.fa-shopping-cart
+                      .cont-col2
+                        .desc
+                          | New order received with
+                          span.label.label-sm.label-danger
+                            | Reference Number: DR23923
+                  .col2
+                    .date
+                      | 30 mins
+                li
+                  .col1
+                    .cont
+                      .cont-col1
+                        .label.label-sm.label-success
+                          i.fa.fa-user
+                      .cont-col2
+                        .desc
+                          | You have 5 pending membership that requires a quick review.
+                  .col2
+                    .date
+                      | 24 mins
+                li
+                  .col1
+                    .cont
+                      .cont-col1
+                        .label.label-sm.label-danger
+                          i.fa.fa-bell-o
+                      .cont-col2
+                        .desc
+                          | Web server hardware needs to be upgraded.
+                          span.label.label-sm.label-warning
+                            | Overdue
+                  .col2
+                    .date
+                      | 2 hours
+                li
+                  a(href='javascript:;')
+                    .col1
+                      .cont
+                        .cont-col1
+                          .label.label-sm.label-default
+                            i.fa.fa-briefcase
+                        .cont-col2
+                          .desc
+                            | IPO Report for year 2013 has been released.
+                    .col2
+                      .date
+                        | 20 mins
+              h3.list-heading System
+              ul.feeds.list-items
+                li
+                  .col1
+                    .cont
+                      .cont-col1
+                        .label.label-sm.label-info
+                          i.fa.fa-shopping-cart
+                      .cont-col2
+                        .desc
+                          | New order received with
+                          span.label.label-sm.label-success
+                            | Reference Number: DR23923
+                  .col2
+                    .date
+                      | 30 mins
+                li
+                  .col1
+                    .cont
+                      .cont-col1
+                        .label.label-sm.label-success
+                          i.fa.fa-user
+                      .cont-col2
+                        .desc
+                          | You have 5 pending membership that requires a quick review.
+                  .col2
+                    .date
+                      | 24 mins
+                li
+                  .col1
+                    .cont
+                      .cont-col1
+                        .label.label-sm.label-warning
+                          i.fa.fa-bell-o
+                      .cont-col2
+                        .desc
+                          | Web server hardware needs to be upgraded.
+                          span.label.label-sm.label-default
+                            | Overdue
+                  .col2
+                    .date
+                      | 2 hours
+                li
+                  a(href='javascript:;')
+                    .col1
+                      .cont
+                        .cont-col1
+                          .label.label-sm.label-info
+                            i.fa.fa-briefcase
+                        .cont-col2
+                          .desc
+                            | IPO Report for year 2013 has been released.
+                    .col2
+                      .date
+                        | 20 mins
+          #quick_sidebar_tab_3.tab-pane.page-quick-sidebar-settings
+            .page-quick-sidebar-settings-list
+              h3.list-heading General Settings
+              ul.list-items.borderless
+                li
+                  | Enable Notifications
+                  input.make-switch(type='checkbox', checked='', data-size='small', data-on-color='success', data-on-text='ON', data-off-color='default', data-off-text='OFF')
+                li
+                  | Allow Tracking
+                  input.make-switch(type='checkbox', data-size='small', data-on-color='info', data-on-text='ON', data-off-color='default', data-off-text='OFF')
+                li
+                  | Log Errors
+                  input.make-switch(type='checkbox', checked='', data-size='small', data-on-color='danger', data-on-text='ON', data-off-color='default', data-off-text='OFF')
+                li
+                  | Auto Sumbit Issues
+                  input.make-switch(type='checkbox', data-size='small', data-on-color='warning', data-on-text='ON', data-off-color='default', data-off-text='OFF')
+                li
+                  | Enable SMS Alerts
+                  input.make-switch(type='checkbox', checked='', data-size='small', data-on-color='success', data-on-text='ON', data-off-color='default', data-off-text='OFF')
+              h3.list-heading System Settings
+              ul.list-items.borderless
+                li
+                  | Security Level
+                  select.form-control.input-inline.input-sm.input-small
+                    option(value='1') Normal
+                    option(value='2', selected='') Medium
+                    option(value='e') High
+                li
+                  | Failed Email Attempts
+                  input.form-control.input-inline.input-sm.input-small(value='5')
+                li
+                  | Secondary SMTP Port
+                  input.form-control.input-inline.input-sm.input-small(value='3560')
+                li
+                  | Notify On System Error
+                  input.make-switch(type='checkbox', checked='', data-size='small', data-on-color='danger', data-on-text='ON', data-off-color='default', data-off-text='OFF')
+                li
+                  | Notify On SMTP Error
+                  input.make-switch(type='checkbox', checked='', data-size='small', data-on-color='warning', data-on-text='ON', data-off-color='default', data-off-text='OFF')
+              .inner-content
+                button.btn.btn-success
+                  i.icon-settings
+                  |  Save Changes
