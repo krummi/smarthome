@@ -1,0 +1,1 @@
+dropdb furugrund -U postgres
