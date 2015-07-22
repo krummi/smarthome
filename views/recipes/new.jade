@@ -11,10 +11,20 @@ block content
           input.form-control.input-lg(type='text', placeholder="What's the title of this recipe?", style="font-size: 20px;")
         .form-group
           textarea(id='body', name='content', data-provide='markdown', rows='10')
+        .form-group
+          input.form-control#categories(name='categories', value='red, blue')
         .form-actions
           button.btn.green(type='submit') Create
           button.btn.default(type='button') Cancel
 
+block styles
+  link(rel='stylesheet', type='text/css', href='/global/plugins/select2/select2.css')
+
 block scripts
   script(src='/global/plugins/bootstrap-markdown/lib/markdown.js', type='text/javascript')
   script(src='/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js', type='text/javascript')
+  script(src='/global/plugins/select2/select2.min.js')
+  script(type='text/javascript').
+    $('#categories').select2({
+      tags: ["red", "green", "blue", "yellow", "pink"]
+    });
