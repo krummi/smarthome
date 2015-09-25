@@ -1,0 +1,19 @@
+extends ../layouts/default
+
+block content
+  .portlet.light
+    .portlet-title
+      .caption.caption-md
+        span.caption-subject.theme-font-color.bold.uppercase(style="font-size: 25px; margin-top: 10px;") Products
+    .portlet-body
+      ul
+        for product in products
+          li #{product.title} (#{product.barcode})
+
+      hr
+      
+      h3 Add new product
+      form(action='/products/new', method='post')
+        input(type='text', name='title', placeholder='Product name')
+        input(type='text', name='barcode', placeholder='Barcode')
+        input(type='submit')
