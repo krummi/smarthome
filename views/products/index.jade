@@ -1,19 +1,32 @@
 extends ../layouts/default
 
 block content
-  .portlet.light
-    .portlet-title
-      .caption.caption-md
-        span.caption-subject.theme-font-color.bold.uppercase(style="font-size: 25px; margin-top: 10px;") Products
-    .portlet-body
-      ul
-        for product in products
-          li #{product.title} (#{product.barcode})
+  .row
+    h1 Products
+    .col-lg-8
+      table.table.table-hover
+        thead
+          tr
+            th Name
+            th(style='width: 250px;') Barcode
+        tbody
+          for product in products
+            tr
+              td= product.title
+              td= product.barcode
+        tfoot
+          form(action='/products/new', method='post')
+            tr
+              td
+                input.form-control(type='text', name='title', placeholder='Product name')
+              td
+                .input-group
+                  input.form-control(type='text', name='barcode', placeholder='Barcode')
+                  span.input-group-btn
+                    button.btn.btn-primary(type='submit') Add
 
-      hr
-      
-      h3 Add new product
-      form(action='/products/new', method='post')
-        input(type='text', name='title', placeholder='Product name')
-        input(type='text', name='barcode', placeholder='Barcode')
-        input(type='submit')
+    .col-lg-4
+      .panel.panel-primary
+        .panel-heading Metadata
+        .panel-body.
+          A number of <b>#{products.length}</b> products
