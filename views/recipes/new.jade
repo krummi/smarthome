@@ -10,16 +10,17 @@ block content
         Hey there!
     .form-group
       input.form-control#categories(name='categories', value='red, blue')
-    .form-actions
-      button.btn.green(type='submit') Create
+    .form-actions(style='margin-bottom: 15px;')
+      button.btn.btn-primary.green(type='submit') Create
       button.btn.default(type='button') Cancel
 
 block styles
-  link(rel='stylesheet', type='text/css', href='/global/plugins/select2/select2.css')
+  link(rel='stylesheet', type='text/css', href='/styles/select2.css')
+  link(rel='stylesheet', type='text/css', href='/styles/select2-bootstrap.css')
 
 block scripts
   script(type='text/javascript', src='//cdn.ckeditor.com/4.5.3/standard/ckeditor.js')
-  script(src='/global/plugins/select2/select2.min.js')
+  script(src='/scripts/select2.min.js')
   script(type='text/javascript').
     CKEDITOR.replace('body', {
       removePlugins: 'about,blockquote,maximize,symbol,tabletools,table,scayt,pastefromword,pastetext,undo,clipboard,wsc,stylescombo,elementspath',
