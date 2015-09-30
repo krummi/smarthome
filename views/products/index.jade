@@ -2,7 +2,7 @@ extends ../layouts/default
 
 block content
   .row
-    h1 Products
+    h2 Products
     .col-lg-8
       table.table.table-hover
         thead
@@ -20,13 +20,13 @@ block content
               td
                 input.form-control(type='text', name='title', placeholder='Product name')
               td
-                .input-group
+                .input-group(style='margin-left: -17px;')
                   input.form-control(type='text', name='barcode', placeholder='Barcode')
                   span.input-group-btn
                     button.btn.btn-primary(type='submit') Add
 
     .col-lg-4
-      .panel.panel-primary
-        .panel-heading Metadata
+      .panel.panel-default
+        .panel-heading Stats
         .panel-body.
-          A number of <b>#{products.length}</b> products
+          A total of <b>#{products.length}</b> products

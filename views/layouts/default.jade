@@ -5,10 +5,11 @@ html(lang='en')
     title Furugrund 77
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    link(rel='stylesheet', href='styles/bootstrap.css', media='screen')
-    link(rel='stylesheet', href='styles/custom.min.css', media='screen')
+    link(rel='stylesheet', href='/styles/bootstrap.css', media='screen')
+    link(rel='stylesheet', href='/styles/custom.min.css', media='screen')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
     link(rel='icon', type='image/png', href='/favicon.png')
+    block styles
   body
     .navbar.navbar-default.navbar-fixed-top
       .container
@@ -31,10 +32,12 @@ html(lang='en')
           ul.nav.navbar-nav.navbar-right
             li
               a(href='https://wrapbootstrap.com/?ref=bsw', target='_blank')
-                i.fa.fa-user &nbsp; Hrafn Eiríksson
+                i.fa.fa-user
+                span(style='margin-left: 8px;') Hrafn Eiríksson
     .container
       block content
 
     script(type='text/javascript', src='https://code.jquery.com/jquery-1.10.2.min.js')
     script(type='text/javascript', src='/scripts/bootstrap.min.js')
     script(type='text/javascript', src='http://bootswatch.com/assets/js/custom.js')
+    block scripts
