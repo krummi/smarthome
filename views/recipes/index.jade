@@ -1,12 +1,30 @@
 extends ../layouts/default
 
 block content
-  .portlet.light
-    .portlet-title
-      .caption.caption-md
-        span.caption-subject.theme-font-color.bold.uppercase(style="font-size: 25px; margin-top: 10px;") Your Recipes
-      .actions
-        a.btn.green.btn-lg(href="/recipes/new")
+  .row
+    .col-lg-12
+      .pull-left
+        h2 Recipes
+      .pull-right
+        a.btn.green.btn-primary(href='/recipes/new', style='margin-top: 18px;')
           i.fa.fa-plus &nbsp;Add Recipe
-    .portlet-body
-    | hehehe
+  .row
+    .col-lg-12
+      table.table(style='clear: both; margin-top: 10px;')
+        tbody
+          tr
+            td(style='font-size: 1.3em;')
+              button.btn.btn-xs.btn-default
+                i.fa.fa-edit
+              span &nbsp; Pönnukökurnar hennar mömmu
+            td
+              span.label.label-primary(style='font-size: 13px;') Eftirréttur
+              span.label.label-info(style='font-size: 13px; margin-left: 5px;') Sykur
+              tr
+                td(style='font-size: 1.3em;')
+                  button.btn.btn-xs.btn-default
+                    i.fa.fa-edit
+                  span &nbsp; Pönnukökurnar hennar mömmu
+                td
+                  span.label.label-primary(style='font-size: 13px;') Eftirréttur
+                  span.label.label-info(style='font-size: 13px; margin-left: 5px;') Sykur
