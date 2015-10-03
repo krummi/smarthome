@@ -10,21 +10,15 @@ block content
           i.fa.fa-plus &nbsp;Add Recipe
   .row
     .col-lg-12
-      table.table(style='clear: both; margin-top: 10px;')
+      table.table.table-striped(style='clear: both; margin-top: 10px;')
         tbody
-          tr
-            td(style='font-size: 1.3em;')
-              button.btn.btn-xs.btn-default
-                i.fa.fa-edit
-              span &nbsp; Pönnukökurnar hennar mömmu
-            td
-              span.label.label-primary(style='font-size: 13px;') Eftirréttur
-              span.label.label-info(style='font-size: 13px; margin-left: 5px;') Sykur
-              tr
-                td(style='font-size: 1.3em;')
-                  button.btn.btn-xs.btn-default
-                    i.fa.fa-edit
-                  span &nbsp; Pönnukökurnar hennar mömmu
-                td
-                  span.label.label-primary(style='font-size: 13px;') Eftirréttur
-                  span.label.label-info(style='font-size: 13px; margin-left: 5px;') Sykur
+          for recipe in recipes
+            tr
+              td(style='font-size: 1.3em;')
+                button.btn.btn-xs.btn-default
+                  i.fa.fa-edit
+                span(style='margin-left: 10px;')
+                  a(href='/recipes/#{recipe.id}')= recipe.title
+              td(style='text-align: right;')
+                for tag in recipe.tags
+                  span.label.label-primary(style='font-size: 13px;')= tag

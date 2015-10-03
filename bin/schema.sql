@@ -16,12 +16,12 @@ CREATE TYPE recipeType AS ENUM ('link', 'recipe');
 CREATE TABLE IF NOT EXISTS "Recipes" (
   id uuid NOT NULL,
 
-  type recipeType,
-  title character varying(256),
-  bodyHtml TEXT,
-  ingredients JSON,
-  tags character varying(64) ARRAY,
-  link character varying(256) ,
+  "type" recipeType,
+  "title" character varying(256),
+  "bodyHtml" TEXT,
+  "ingredients" JSON,
+  "tags" character varying(64) ARRAY,
+  "link" character varying(256),
 
   "createdAt" timestamp with time zone,
   "updatedAt" timestamp with time zone
