@@ -1,8 +1,17 @@
 extends ../layouts/default
 
 block content
-  h2 New Recipe
-  include _form.jade
+  div(style='margin-top: 25px;')
+    form(action='#{recipe.id !== undefined ? "/recipes/" + recipe.id + "/edit" : "/recipes/new"}', method='post')
+      .form-group
+        input.form-control(type='text', name='title', placeholder='What\'s the title of this recipe?', value='#{recipe.title || ""}', style='font-size: 20px; height: 46px;')
+      .form-group
+        textarea(id='body', name='bodyHtml', rows='40')!= recipe.bodyHtml
+      .form-group
+        input.form-control#categories(name='tags', value='#{recipe.tags || ""}')
+      .form-actions(style='margin-bottom: 15px;')
+        button.btn.btn-primary.green(type='submit') #{recipe.id !== undefined ? "Update" : "Create"}
+        button.btn.default(type='button') Cancel
 
 block styles
   link(rel='stylesheet', type='text/css', href='/styles/select2.css')
@@ -24,5 +33,5 @@ block scripts
     });
 
     $('#categories').select2({
-      tags: ["red", "green", "blue", "yellow", "pink"]
+      tags: ['red', 'green', 'blue', 'yellow', 'pink']
     });

@@ -15,10 +15,10 @@ block content
           for recipe in recipes
             tr
               td(style='font-size: 1.3em;')
-                button.btn.btn-xs.btn-default
+                a.btn.btn-xs.btn-default(href='/recipes/#{recipe.id}/edit')
                   i.fa.fa-edit
                 span(style='margin-left: 10px;')
                   a(href='/recipes/#{recipe.id}')= recipe.title
               td(style='text-align: right;')
                 for tag in recipe.tags
-                  span.label.label-primary(style='font-size: 13px;')= tag
+                  span.label.label-default(style='font-size: 13px; margin-right: 5px;')= tag

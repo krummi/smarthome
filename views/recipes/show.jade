@@ -10,4 +10,25 @@ block content
           i.fa.fa-plus &nbsp;Add Recipe
       hr(style='clear: both;')
   .row
-    .col-lg-12!= recipe.bodyHtml
+    .col-lg-3
+      h3 Innihald
+      .ingredients-container
+        table(style='width: 100%; font-size: 1.2em;')
+          tbody
+            if recipe.ingredients.constructor === Array
+              for ingredient in recipe.ingredients
+                tr
+                  td(style='height: 35px; width: 70px; padding-right: 5px; text-align: right;') #{ingredient.quantity} #{ingredient.unit}
+                  td(style='padding-left: 5px;')= ingredient.item
+            else
+              for group, groupName in recipe.ingredients
+                tr
+                  td(colspan='2', style='padding-top: 10px; font-weight: bold; font-size: 0.9em;')= groupName
+                for ingredient in group
+                  tr
+                    td(style='height: 35px; width: 70px; padding-right: 5px; text-align: right;') #{ingredient.quantity} #{ingredient.unit}
+                    td(style='padding-left: 5px;')= ingredient.item
+
+    .col-lg-9
+      h3 Aðferð
+      .description(style='font-size: 1.1em; line-height: 29px;')!= recipe.bodyHtml
