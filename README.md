@@ -3,11 +3,11 @@ Furugrund 77
 
 ## Next Up
 
-- One-way synchronization of my Wunderlist shopping list.
 - Some kind of authentication system.
 - Meniga integration.
 - Recipes:
   - Make recipes filterable by tags.
+  - Make the tags look better.
 
 ## TODO (long term)
 
