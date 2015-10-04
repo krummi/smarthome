@@ -6,12 +6,15 @@ block content
       .form-group
         input.form-control(type='text', name='title', placeholder='What\'s the title of this recipe?', value='#{recipe.title || ""}', style='font-size: 20px; height: 46px;')
       .form-group
-        textarea(id='body', name='bodyHtml', rows='40')!= recipe.bodyHtml
+        textarea(id='bodyHtml', name='bodyHtml', rows='20')!= recipe.bodyHtml
       .form-group
         input.form-control#categories(name='tags', value='#{recipe.tags || ""}')
+      .form-group
+        textarea(id='ingredients', name='ingredients', rows='4', style='width: 100%')!= JSON.stringify(recipe.ingredients)
       .form-actions(style='margin-bottom: 15px;')
+        a.btn.btn-default(type='button', style='margin-right: 4px;', href='/recipes/')
+          i.fa.fa-arrow-left &nbsp; Cancel
         button.btn.btn-primary.green(type='submit') #{recipe.id !== undefined ? "Update" : "Create"}
-        button.btn.default(type='button') Cancel
 
 block styles
   link(rel='stylesheet', type='text/css', href='/styles/select2.css')
@@ -21,7 +24,7 @@ block scripts
   script(type='text/javascript', src='//cdn.ckeditor.com/4.5.3/standard/ckeditor.js')
   script(src='/scripts/select2.min.js')
   script(type='text/javascript').
-    CKEDITOR.replace('body', {
+    CKEDITOR.replace('bodyHtml', {
       removePlugins: 'about,blockquote,maximize,symbol,tabletools,table,scayt,pastefromword,pastetext,undo,clipboard,wsc,stylescombo,elementspath',
       toolbar: [
         { name: 'basicstyles', items: ['Bold', 'Italic', 'Strike'] },

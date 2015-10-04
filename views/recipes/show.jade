@@ -6,8 +6,8 @@ block content
       .pull-left
         h2= recipe.title
       .pull-right
-        a.btn.green.btn-primary(href='/recipes/new', style='margin-top: 18px;')
-          i.fa.fa-plus &nbsp;Add Recipe
+        a.btn.green.btn-warning(href='/recipes/#{recipe.id}/edit', style='margin-top: 18px;')
+          i.fa.fa-edit &nbsp;Edit Recipe
       hr(style='clear: both;')
   .row
     .col-lg-3
