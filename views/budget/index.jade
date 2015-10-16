@@ -1,0 +1,48 @@
+extends ../layouts/default
+
+block content
+  .row
+    h2 Expenses This Month
+    #this-month-container(style="width:100%; height:400px;")
+
+
+block scripts
+  script(type='text/javascript', src='/scripts/highcharts.js')
+  script(type='text/javascript').
+    $(function () {
+      var expensesByDay = !{JSON.stringify(expensesByDay)};
+      var plannedExpenses = !{JSON.stringify(plannedExpenses)};
+      var sum = 0;
+      var actualData = Object.keys(expensesByDay).map(function (key) {
+        sum += expensesByDay[key];
+        return [Date.UTC(2015, 9, key), sum];
+      });
+      sum = 0;
+      var plannedData = plannedExpenses.map(function (o) {
+        sum += o.amount;
+        return [Date.UTC(2015, 9, o.day), sum];
+      });
+      $('#this-month-container').highcharts({
+          chart: {
+              type: 'line'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+            type: 'datetime'
+          },
+          yAxis: {
+              title: {
+                  text: 'ISK'
+              }
+          },
+          series: [{
+              name: 'Actual',
+              data: actualData
+          }, {
+              name: 'Planned',
+              data: plannedData
+          }]
+      });
+    });
