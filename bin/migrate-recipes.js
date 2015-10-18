@@ -20,7 +20,8 @@ function parseConnectionString(databaseUrl) {
     port: parsed.port,
     user: parsed.auth.split(':')[0],
     password: parsed.auth.split(':')[1],
-    database: parsed.path.substring(1)
+    database: parsed.path.substring(1),
+    ssl: true
   };
 }
 
@@ -34,7 +35,7 @@ var sourceKnex = knex({
 console.log(conf.get('DATABASE_URL'));
 var targetKnex = require('knex')({
   client: 'postgres',
-  connection: conf.get('DATABASE_URL')
+  connection: parseConnectionString(conf.get('DATABASE_URL'))
 });
 
 sourceKnex.from('recipes').select('*')
