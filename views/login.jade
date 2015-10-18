@@ -1,21 +1,20 @@
-extends layouts/login
+extends layouts/default
 
 block content
-  // BEGIN PAGE HEAD
-  .page-head
-    // BEGIN PAGE TITLE
-    .page-title
-      h1
-        | Dashboard
-        small &nbsp; statistics & reports
-    // END PAGE TITLE
-  // END PAGE HEAD
-  // BEGIN PAGE BREADCRUMB
-  ul.page-breadcrumb.breadcrumb.hide
-    li
-      a(href='javascript:;') Home
-      i.fa.fa-circle
-    li.active
-      | Dashboard
-  // END PAGE BREADCRUMB
-  | Stuff!
+  .row
+    .col-sm-6.col-sm-offset-3.form-box
+      .form-top
+        .form-top-left
+          h3 Login
+          p Enter your username and password to log on:
+        .form-top-right
+          i.fa.fa-key
+      .form-bottom
+        form.login-form(role='form', action='/login', method='post')
+          .form-group
+            label.sr-only(for='username') Username
+            input#form-username.username.form-control(type='text', name='username', placeholder='Username...')
+          .form-group
+            label.sr-only(for='password') Password
+            input#form-password.password.form-control(type='password', name='password', placeholder='Password...')
+          button.btn(type='submit') Sign in!

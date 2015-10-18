@@ -3,7 +3,6 @@ Furugrund 77
 
 ## Next Up
 
-- Some kind of authentication system.
 - Meniga integration.
 - Recipes:
   - Make recipes filterable by tags.

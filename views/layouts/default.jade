@@ -31,9 +31,13 @@ html(lang='en')
               a(href='/budget') Budget
           ul.nav.navbar-nav.navbar-right
             li
-              a(href='https://wrapbootstrap.com/?ref=bsw', target='_blank')
-                i.fa.fa-user
-                span(style='margin-left: 8px;') Hrafn Eiríksson
+              if user
+                a(href='/logout')
+                  i.fa.fa-user
+                  span(style='margin-left: 8px;') #{user.name}
+              else
+                a(href='/login')
+                  Login
     .container
       block content
 
