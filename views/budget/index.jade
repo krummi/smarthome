@@ -2,25 +2,25 @@ extends ../layouts/default
 
 block content
   .row
-    h2 Expenses This Month
-    #this-month-container(style="width:100%; height:400px;")
+    .col-md-6
+      h3 Burndown chart
+      #this-month-container(style="width:100%; height:400px;")
+    .col-md-6
+      h3 By category
+      #by-category(style='width: 100%; height: 400px;')
 
 
 block scripts
   script(type='text/javascript', src='/scripts/highcharts.js')
   script(type='text/javascript').
     $(function () {
-      var expensesByDay = !{JSON.stringify(expensesByDay)};
+      var actualExpenses = !{JSON.stringify(expensesByDay)};
       var plannedExpenses = !{JSON.stringify(plannedExpenses)};
-      var sum = 0;
-      var actualData = Object.keys(expensesByDay).map(function (key) {
-        sum += expensesByDay[key];
-        return [Date.UTC(2015, 9, key), sum];
+      var actualData = actualExpenses.map(function (o) {
+        return [Date.UTC(2015, 9, o.day), o.amount];
       });
-      sum = 0;
       var plannedData = plannedExpenses.map(function (o) {
-        sum += o.amount;
-        return [Date.UTC(2015, 9, o.day), sum];
+        return [Date.UTC(2015, 9, o.day), o.amount];
       });
       $('#this-month-container').highcharts({
           chart: {
@@ -37,6 +37,9 @@ block scripts
                   text: 'ISK'
               }
           },
+          credits: {
+              enabled: false
+          },
           series: [{
               name: 'Actual',
               data: actualData
@@ -45,4 +48,56 @@ block scripts
               data: plannedData
           }]
       });
+    });
+
+    var categoryNames = !{JSON.stringify(categoryNames)};
+    var categoryValues = !{JSON.stringify(categoryValues)};
+    $('#by-category').highcharts({
+      chart: {
+        type: 'bar'
+      },
+      title: {
+          text: ''
+      },
+      xAxis: {
+        categories: categoryNames
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: 'Expenses (ISK)',
+              align: 'high'
+          },
+          labels: {
+              overflow: 'justify'
+          }
+      },
+      tooltip: {
+          valueSuffix: ' kr.'
+      },
+      plotOptions: {
+          bar: {
+              dataLabels: {
+                  enabled: true
+              }
+          }
+      },
+      legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'top',
+          x: -40,
+          y: 80,
+          floating: true,
+          borderWidth: 1,
+          backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+          shadow: true
+      },
+      credits: {
+          enabled: false
+      },
+      series: [{
+          name: 'Expenses',
+          data: categoryValues
+      }]
     });
