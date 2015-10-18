@@ -20,15 +20,16 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
         #navbar-main.navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li
-              a(href='/') Dashboard
-            li
-              a(href='/recipes') Recipes
-            li
-              a(href='/products') Products
-            li
-              a(href='/budget') Budget
+          if user
+            ul.nav.navbar-nav
+              li
+                a(href='/') Dashboard
+              li
+                a(href='/recipes') Recipes
+              li
+                a(href='/products') Products
+              li
+                a(href='/budget') Budget
           ul.nav.navbar-nav.navbar-right
             li
               if user
