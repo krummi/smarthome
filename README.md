@@ -3,12 +3,9 @@ Furugrund 77
 
 ## Next Up
 
-- Meniga integration.
+- Meniga integration:
+  - Read from database and put into database.
 - Recipes:
   - Make recipes filterable by tags.
   - Make the tags look better.
-
-## TODO (long term)
-
-- One-way synchronization of some calendars.
-- Profiles.
+  - Add a button to "add everything" to Wunderlist!

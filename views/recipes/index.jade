@@ -21,4 +21,5 @@ block content
                   a(href='/recipes/#{recipe.id}')= recipe.title
               td(style='text-align: right;')
                 for tag in recipe.tags
-                  span.label.label-default(style='font-size: 13px; margin-right: 5px;')= tag
+                  a(href='/recipes?tag=#{tag}')
+                    span.label.label-default(style='font-size: 13px; margin-right: 5px;')= tag
