@@ -36,5 +36,5 @@ block scripts
     });
 
     $('#categories').select2({
-      tags: ['red', 'green', 'blue', 'yellow', 'pink']
+      tags: !{JSON.stringify(tags)}
     });
