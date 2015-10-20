@@ -1,12 +1,16 @@
 extends ../layouts/default
 
 block content
+  #alert-box.row(style='margin-top: 20px; display: none;')
+    .alert.alert-dismissible.alert-success#alert
   .row
     .col-lg-12
       .pull-left
         h2= recipe.title
       .pull-right
-        a.btn.green.btn-warning(href='/recipes/#{recipe.id}/edit', style='margin-top: 18px;')
+        a.btn.green.btn-default#buy(href='/recipes/#{recipe.id}/buy', style='margin-top: 18px; margin-right: 10px;')
+          i.fa.fa-shopping-cart &nbsp;Add To Cart
+        a.btn.green.btn-primary(href='/recipes/#{recipe.id}/edit', style='margin-top: 18px;')
           i.fa.fa-edit &nbsp;Edit Recipe
       hr(style='clear: both;')
   .row
@@ -32,3 +36,20 @@ block content
     .col-lg-9
       h3 Aðferð
       .description(style='font-size: 1.1em; line-height: 29px;')!= recipe.bodyHtml
+
+block scripts
+  script(type='text/javascript').
+    $('#buy').click(function () {
+      $.post('/recipes/#{recipe.id}/buy', function (data) {
+        // Wunderlist success!
+        $('#alert-box > .alert').text(
+          'All of the items from this recipe have been added to your shopping list!');
+        $('#alert-box').slideDown();
+        setTimeout(function () {
+          $('#alert-box').slideUp();
+        }, 4000);
+      }).fail(function () {
+        console.log('failed to add to Wunderlist - go debug! :@');
+      });
+      return false;
+    });
