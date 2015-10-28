@@ -8,6 +8,7 @@ const _ = require('lodash');
 const moment = require('moment');
 
 const conf = require('node-oz-helpers').getConf();
+const log = require('node-oz-helpers').getLogger();
 
 const redisClient = redis.createClient(conf.get('REDIS_URL'));
 bluebird.promisifyAll(redisClient);
@@ -77,7 +78,7 @@ co(function* () {
       page++;
     } while (transactions.HasMorePages);
     let success = yield redisClient.setAsync('meniga:transactions', JSON.stringify(allTransactions));
-    console.log('transactions updated successfully?', success);
+    log.info('transactions updated successfully? ' + success);
 
     // Find categories!
     let allCategoryIds = _.pluck(categories, 'Id');
@@ -88,8 +89,8 @@ co(function* () {
       return { name: data[0], amount: -data[1] };
     });
     success = yield redisClient.setAsync('meniga:categories', JSON.stringify(results));
-    console.log('categories updated successfully?', success);
+    log.info('transactions updated successfully? ' + success);
   } catch (err) {
-    console.error('got err:', err);
+    log.error({ err: err }, 'got err');
   }
 });
