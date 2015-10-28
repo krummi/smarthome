@@ -9,7 +9,7 @@ const moment = require('moment');
 
 const conf = require('node-oz-helpers').getConf();
 
-const redisClient = redis.createClient({ url: conf.get('REDIS_URL') });
+const redisClient = redis.createClient(conf.get('REDIS_URL'));
 bluebird.promisifyAll(redisClient);
 redisClient.unref();
 
