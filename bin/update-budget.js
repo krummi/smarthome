@@ -12,7 +12,6 @@ const log = require('node-oz-helpers').getLogger();
 
 const redisClient = redis.createClient(conf.get('REDIS_URL'));
 bluebird.promisifyAll(redisClient);
-redisClient.unref();
 
 function createOptions(categories) {
   return {
@@ -61,11 +60,14 @@ co(function* () {
     let page = 0;
     let transactions;
     let allTransactions = [];
+    let now = moment.utc();
+    let firstThisMonth = now.date(1).hour(0).minute(0).second(0);
+    let firstNextMonth = firstThisMonth.clone().add(1, 'month');
     do {
       transactions = yield menigaClient.getTransactionsPage({
         filter: {
-          PeriodFrom: moment('2015-10-01'),
-          PeriodTo: moment('2015-11-01')
+          PeriodFrom: firstThisMonth,
+          PeriodTo: firstNextMonth
         },
         page: page
       });
@@ -90,6 +92,8 @@ co(function* () {
     });
     success = yield redisClient.setAsync('meniga:categories', JSON.stringify(results));
     log.info('transactions updated successfully? ' + success);
+
+    redisClient.unref();
   } catch (err) {
     log.error({ err: err }, 'got err');
   }
