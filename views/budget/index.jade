@@ -17,10 +17,10 @@ block scripts
       var actualExpenses = !{JSON.stringify(expensesByDay)};
       var plannedExpenses = !{JSON.stringify(plannedExpenses)};
       var actualData = actualExpenses.map(function (o) {
-        return [Date.UTC(2015, 9, o.day), o.amount];
+        return [Date.UTC(2016, 0, o.day), o.amount];
       });
       var plannedData = plannedExpenses.map(function (o) {
-        return [Date.UTC(2015, 9, o.day), o.amount];
+        return [Date.UTC(2016, 0, o.day), o.amount];
       });
       $('#this-month-container').highcharts({
           chart: {
