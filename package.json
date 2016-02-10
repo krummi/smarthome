@@ -32,7 +32,7 @@
     "minimist": "^1.1.1",
     "moment": "^2.8.4",
     "morgan": "~1.3.0",
-    "node-oz-helpers": "git+https://90755bf216f03a1c06ba12443c0ecc6ce9e70bf4:x-oauth-basic@github.com/ozinc/node-oz-helpers.git",
+    "node-oz-helpers": "ozinc/node-oz-helpers",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
     "pg": "^4.1.1",

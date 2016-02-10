@@ -3,12 +3,16 @@ extends ../layouts/default
 block content
   .row
     .col-md-6
-      h3 Burndown chart
+      h3 Variable expenses burndown chart
       #this-month-container(style="width:100%; height:400px;")
     .col-md-6
-      h3 By category
+      h3 Variable expenses by category
       #by-category(style='width: 100%; height: 400px;')
-
+      span(style='font-size: 20px;') Total: #{total}
+  .row
+    .col-md-12
+      h3 Fixed by months
+      #fixed-month-container(style="width: 100%; height: 500px;")
 
 block scripts
   script(type='text/javascript', src='/scripts/highcharts.js')
@@ -17,10 +21,10 @@ block scripts
       var actualExpenses = !{JSON.stringify(expensesByDay)};
       var plannedExpenses = !{JSON.stringify(plannedExpenses)};
       var actualData = actualExpenses.map(function (o) {
-        return [Date.UTC(2016, 0, o.day), o.amount];
+        return [Date.UTC(2016, 1, o.day), o.amount];
       });
       var plannedData = plannedExpenses.map(function (o) {
-        return [Date.UTC(2016, 0, o.day), o.amount];
+        return [Date.UTC(2016, 1, o.day), o.amount];
       });
       $('#this-month-container').highcharts({
           chart: {
@@ -34,7 +38,7 @@ block scripts
           },
           yAxis: {
               title: {
-                  text: 'ISK'
+                  text: null
               }
           },
           credits: {
@@ -65,7 +69,7 @@ block scripts
       yAxis: {
           min: 0,
           title: {
-              text: 'Expenses (ISK)',
+              text: null,
               align: 'high'
           },
           labels: {
@@ -83,15 +87,7 @@ block scripts
           }
       },
       legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'top',
-          x: -40,
-          y: 80,
-          floating: true,
-          borderWidth: 1,
-          backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-          shadow: true
+        enabled: false
       },
       credits: {
           enabled: false
@@ -100,4 +96,32 @@ block scripts
           name: 'Expenses',
           data: categoryValues
       }]
+    });
+
+    $('#fixed-month-container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            categories: !{JSON.stringify(fixed.x)}
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: null
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+        },
+        series: !{JSON.stringify(fixed.g)}
     });
