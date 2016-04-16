@@ -111,9 +111,9 @@ co(function* () {
     let page = 0;
     let transactions;
     let allTransactions = [];
-    let now = moment.utc();
-    let firstThisMonth = now.date(1).hour(0).minute(0).second(0);
-    let firstNextMonth = firstThisMonth.clone().add(1, 'month');
+    let firstThisMonth = moment().startOf('month').subtract(1, 'month');
+    let firstNextMonth = moment().startOf('month');
+    console.log(firstThisMonth.format() + ' -> ' + firstNextMonth.format());
     do {
       transactions = yield menigaClient.getTransactionsPage({
         filter: {
