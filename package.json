@@ -19,6 +19,7 @@
     "gulp": "^3.9.1",
     "gulp-less": "^3.0.5",
     "gulp-nodemon": "^2.0.6",
+    "jade": "^1.11.0",
     "knex": "^0.8.6",
     "lodash": "^3.10.1",
     "meniga": "krummi/meniga-client",
