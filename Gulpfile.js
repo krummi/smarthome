@@ -1,16 +1,18 @@
+'use strict';
+
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var less = require('gulp-less');
 
-gulp.task('less', function () {
-  console.log('Compiling LESS.');
+gulp.task('less', () => {
+  console.log('Compiling LESS');
   gulp.src('./public/css/**/*.less')
     .pipe(less())
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('nodemon', function () {
-  console.log('Running nodemon...');
+gulp.task('nodemon', () => {
+  console.log('Running nodemon');
   nodemon({
     script: 'bin/server',
     ext: 'js, jade, html, less',
