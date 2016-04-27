@@ -1,9 +1,6 @@
-Furugrund 77
-============
+# SmartHome 🏠
+> An extendable web app for the smart household
 
-## Next Up
+## NOTE
 
-- Meniga integration:
-  - Read from database and put into database.
-- Recipes:
-  - Make the tags look better.
+Currently, this is probably not useful for you. Sawry.

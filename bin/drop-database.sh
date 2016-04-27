@@ -1,1 +1,1 @@
-dropdb furugrund -U postgres
+dropdb smarthome -U postgres

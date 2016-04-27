@@ -1,3 +1,3 @@
-createdb furugrund -U postgres &&
-psql furugrund -U postgres -c "CREATE EXTENSION \"uuid-ossp\";" &&
-psql -U postgres furugrund < schema.sql
+createdb smarthome -U postgres &&
+psql smarthome -U postgres -c "CREATE EXTENSION \"uuid-ossp\";" &&
+psql -U postgres smarthome < schema.sql
