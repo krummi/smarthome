@@ -1,5 +1,5 @@
 # SmartHome
-> 🏠 An extendable web app for the smart household
+> An extendable web app for the smart household 🏠
 
 ## NOTE
 
