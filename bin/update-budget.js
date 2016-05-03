@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 
 const redis = require('redis');
@@ -13,7 +14,7 @@ const log = require('node-oz-helpers').getLogger();
 const redisClient = redis.createClient(conf.get('REDIS_URL'));
 bluebird.promisifyAll(redisClient);
 
-function createOptionsNew(categories) {
+function getOptions(categories, from, to) {
   return {
     filter: {
       Type: 1,
@@ -37,8 +38,8 @@ function createOptionsNew(categories) {
         DisableSliceGrouping: false
       },
       Period: 3, // '1', // '0' = this month, '1' = last month, 3 = "velja annað tímabil?"
-      PeriodFrom: moment('2015-11-01 00:00:00'), // moment('2015-01-01 00:00:00'),
-      PeriodTo: moment('2016-05-01 00:00:00'), // moment('2016-01-01 00:00:00'),
+      PeriodFrom: from,
+      PeriodTo: to,
       ComparisonPeriod: null,
       CategoryIds: categories,
       AccountIds: null,
@@ -49,11 +50,8 @@ function createOptionsNew(categories) {
   };
 }
 
-function isFixedId(categoriesById, id) {
-  if (id === 87) {
-    return false;
-  }
-  return id === 61 || categoriesById[id].IsFixedExpenses;
+function isFixedCategory(category) {
+  return (category.Name === 'Áskriftir og miðlun' || category.IsFixedExpenses);
 }
 
 // main():
@@ -64,8 +62,7 @@ co(function* () {
     conf.get('MENIGA_USERNAME'), conf.get('MENIGA_PASSWORD'));
 
   let categories = yield menigaClient.getUserCategories();
-  let categoriesByIndex = _.keyBy(categories, 'Id');
-  let categoriesByName = _.keyBy(categories, 'Name');
+  let categoriesById = _.keyBy(categories, 'Id');
 
   let success = yield redisClient.setAsync(
     'meniga:categories', JSON.stringify(categories));
@@ -87,10 +84,9 @@ co(function* () {
     });
     _.forEach(transactions.Transactions, transaction => {
       // Attach the category to the transaction
-      if (_.has(categoriesByIndex, transaction.CategoryId)) {
-        transaction.Category = categoriesByIndex[transaction.CategoryId];
+      if (_.has(categoriesById, transaction.CategoryId)) {
+        transaction.Category = categoriesById[transaction.CategoryId];
       }
-
       // Ignore transactions that have the tag 'omit'
       if (!_.includes(transaction.Tags, 'omit')) {
         all.push(transaction);
@@ -103,32 +99,39 @@ co(function* () {
     'meniga:transactions', JSON.stringify(all));
   log.info('transactions updated successfully? ' + success);
 
-  // FIXED LAST MONTHS
+  // Fixed expenses previous N months
 
-  let categoriesById = _.keyBy(categories, 'Id');
-  let fixedCategoryIds = _.filter(allCategoryIds, _.partial(isFixedId, categoriesById));
-  let things = yield menigaClient.getTrendsReport(createOptionsNew(fixedCategoryIds));
+  let fixedCategoryIds = _(categories)
+    .filter(isFixedCategory)
+    .map('Id')
+    .value();
+
+  let periodFrom = upper.clone().add(1, 'second').subtract(6, 'months');
+  let periodTo = upper.clone().add(1, 'second');
+  log.info(`fixed report for: ${periodFrom.format()} -> ${periodTo.format()}`);
+  let report = yield menigaClient.getTrendsReport(getOptions(
+    fixedCategoryIds, periodFrom, periodTo));
   let groups = {};
-  let xAxis = [];
-  _.forEach(things.Series.Rows, row => {
-    let info = row.Columns[0];
-    xAxis.push(info.Value);
-    let slices = row.Columns.slice(1);
-    _.forEach(slices, slice => {
-      if (!_.has(groups, slice.Name)) {
-        groups[slice.Name] = [];
+  let labels = [];
+  _.forEach(report.Series.Rows, row => {
+    labels.push(row.Columns[0].Value);
+    _.forEach(row.Columns.slice(1), cat => {
+      if (!_.has(groups, cat.Name)) {
+        groups[cat.Name] = [];
       }
-      let value = (slice.Value === 0 ? 0 : -slice.Value);
-      groups[slice.Name].push(value);
+      let value = (cat.Value === 0 ? 0 : -cat.Value);
+      groups[cat.Name].push(value);
     });
   });
-  let transformed = _.map(groups, (value, key) => {
-    return { name: key, data: value, sum: _.sum(value) };
-  });
-  transformed = _.sortBy(transformed, 'sum');
-  success = yield redisClient.setAsync('meniga:fixed', JSON.stringify({ g: transformed, x: xAxis }));
-  log.info('transactions updated successfully? ' + success1 + ' / ' + success);
+  let series = _(groups)
+    .map((v, k) => { return { name: k, data: v, sum: _.sum(v) } })
+    .sortBy('sum')
+    .value();
+  success = yield redisClient.setAsync('meniga:fixed',
+    JSON.stringify({ series, labels }));
+  log.info(`fixed by months successful? ${success}`);
 
+  // done
   redisClient.unref();
 }).catch(err => {
   log.error({ err: err }, 'got err');
